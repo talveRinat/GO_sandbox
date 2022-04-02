@@ -47,24 +47,6 @@ import (
 	"strconv"
 )
 
-func readStdInputSlice() []string {
-	scanner := bufio.NewScanner(os.Stdin)
-	var input []string
-	var i int
-	for scanner.Scan() {
-		i++
-		input = append(input, scanner.Text())
-		numberOfPasswords, _ := strconv.Atoi(input[0])
-		if numberOfPasswords*3 == i-1 {
-			break
-		}
-	}
-	if err := scanner.Err(); err != nil {
-		fmt.Fprintln(os.Stderr, "reading standard input:", err)
-	}
-	return input
-}
-
 func originalPassword(inputData []string) []string {
 	var answer []string
 	numberOfPasswords, _ := strconv.Atoi(inputData[0])
@@ -88,11 +70,31 @@ func compareStrings(firstHalf, secondHalf string) bool {
 	}
 	return false
 }
+
 func writeStdOutputSlice(output []string) {
 	for _, val := range output {
 		fmt.Fprint(os.Stdout, val+"\n")
 	}
 }
+
+func readStdInputSlice() []string {
+	scanner := bufio.NewScanner(os.Stdin)
+	var input []string
+	var i int
+	for scanner.Scan() {
+		i++
+		input = append(input, scanner.Text())
+		numberOfPasswords, _ := strconv.Atoi(input[0])
+		if numberOfPasswords*3 == i-1 {
+			break
+		}
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintln(os.Stderr, "reading standard input:", err)
+	}
+	return input
+}
+
 func main() {
 	input := readStdInputSlice()
 	passwordChecks := originalPassword(input)
