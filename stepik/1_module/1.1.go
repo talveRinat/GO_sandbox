@@ -1,5 +1,3 @@
-package main
-
 /*
 Дано трехзначное число. Найдите сумму его цифр.
 
@@ -15,6 +13,7 @@ Sample Input:
 Sample Output:
 16
 */
+package main
 
 import "fmt"
 
